@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Experience</title>
+    <style>
+        :root {
+            --background-color: #ffffff;
+            --text-color: #000000;
+            --grey-color: #737373;
+            --hover-color: #f0f0f0;
+            --circle-bg: #f5f5f5;
+            --icon-filter: invert(0%);
+        }
+
+        [data-theme="dark"] {
+            --background-color: #1a1a1a;
+            --text-color: #ffffff;
+            --grey-color: #a3a3a3;
+            --hover-color: #2d2d2d;
+            --circle-bg: #2d2d2d;
+            --icon-filter: invert(100%);
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            font-size: 24px;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            text-align: left;
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: normal;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        h1 img {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            filter: var(--icon-filter);
+            transition: filter 0.3s ease;
+        }
+        p {
+            margin-bottom: 2rem;
+            color: var(--grey-color);
+        }
+        .work-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 1rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+        .work-item:hover {
+            background-color: var(--hover-color);
+        }
+        .work-item-circle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            margin-right: 1rem;
+            background-color: var(--circle-bg);
+            border-radius: 50%;
+            font-weight: bold;
+            color: var(--grey-color);
+            font-size: 1.2rem;
+        }
+        .work-item-details {
+            flex: 1;
+        }
+        .work-item-title {
+            font-weight: normal;
+            font-size: 1rem;
+            margin: 0;
+            color: var(--text-color);
+        }
+        .work-item-subtitle {
+            margin: 0.2rem 0;
+            color: var(--grey-color);
+            font-size: 0.9rem;
+        }
+        .work-item-description {
+            margin: 0.5rem 0;
+            color: var(--grey-color);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" id="theme-toggle">🌓</button>
+    <div class="container">
+        <h1>
+            work*
+            <img src="https://cdn-icons-png.flaticon.com/512/545/545680.png" alt="Back Icon" onclick="window.history.back();">
+        </h1>
+        <p>A curated list of my professional experience.</p>
+
+        <div class="work-item">
+            <div class="work-item-circle">SI</div>
+            <div class="work-item-details">
+                <p class="work-item-title">Associate Manager @ Sigmoid</p>
+                <p class="work-item-subtitle">Jan 2024 - Present · Remote</p>
+                <p class="work-item-description">
+                • Made Tableau & PowerBI accelerators to fasten the standardisation of 700+ reports<br><br>
+                • Developed Tableau/Cognos to PowerBI migration Accelerators for planning & migration<br><br>
+                • Made a "What-if" simulator application using Python for F500 org<br><br>
+                • Worked on multiple RFP responses including architectural & solution designing<br><br>
+                • Worked on UI/UX revamping of 50+ Power BI reports for a fortune 500 client<br><br>
+                • Created a standardised theme to reduce the manual effort of formatting by 70%<br><br>
+                • Migrated 6 legacy microstrategy dashboards to Tableau<br><br>
+                • Created automation tool for Tableau dashboard documentation<br><br>
+            </div>
+        </div>  
+
+        <div class="work-item">
+            <div class="work-item-circle">UG</div>
+            <div class="work-item-details">
+                <p class="work-item-title">Data Analyst @ Ugam</p>
+                <p class="work-item-subtitle">Mar 2021 - May 2022 · Mumbai</p>
+                <p class="work-item-description">
+                • Digitized and migrated unstructured data to cloud repository<br><br>
+                • Automated business processes using Excel, Python, GCP and Tableau<br><br>
+                • Built Tableau dashboards for functional departments<br><br>
+                • Integrated third party APIs into a single python script</p>
+            </div>
+        </div>
+
+        <div class="work-item">
+            <div class="work-item-circle">KM</div>
+            <div class="work-item-details">
+                <p class="work-item-title">Software Developer @ KheloMore</p>
+                <p class="work-item-subtitle">Jul 2020 - Mar 2021 · Mumbai</p>
+                <p class="work-item-description">
+                • Built Khelomore@Home platform for booking sports sessions<br><br>
+                • Streamlined vendor booking flow using rbc library<br><br>
+                • Developed Quizmore website for sports quizzes</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+        // Check for saved theme preference or default to user's system preference
+        const currentTheme = localStorage.getItem('theme') || 
+            (prefersDarkScheme.matches ? 'dark' : 'light');
+
+        // Set initial theme
+        if (currentTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+
+        // Theme toggle handler
+        themeToggle.addEventListener('click', () => {
+            let theme = 'light';
+            
+            if (!document.documentElement.hasAttribute('data-theme')) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                theme = 'dark';
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+            }
+            
+            localStorage.setItem('theme', theme);
+        });
+    </script>
+</body>
+</html>
