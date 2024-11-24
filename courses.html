@@ -58,10 +58,23 @@
         }
 
         .container {
-            max-width: 600px;
-            width: 100%;
-            text-align: left;
-        }
+    max-width: 600px;
+    width: 100%;
+    text-align: left;
+    padding: 0 15px;
+}
+
+/* Media query for mobile screens */
+@media screen and (max-width: 768px) { /* Adjust the max-width as needed */
+    body {
+        padding-left: 10%;
+        padding-top: 20%; /* Add 10% left padding on mobile screens */
+    }
+
+    .container {
+        padding: 20px; /* Maintain existing padding inside the container */
+    }
+}
         h1 {
             font-size: 2rem;
             margin-bottom: 1rem;
@@ -172,34 +185,6 @@
             </div>
         </a>
     </div>
-
-    <script>
-        // Theme toggle functionality
-        const themeToggle = document.getElementById('theme-toggle');
-        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-
-        // Check for saved theme preference or default to user's system preference
-        const currentTheme = localStorage.getItem('theme') || 
-            (prefersDarkScheme.matches ? 'dark' : 'light');
-
-        // Set initial theme
-        if (currentTheme === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'dark');
-        }
-
-        // Theme toggle handler
-        themeToggle.addEventListener('click', () => {
-            let theme = 'light';
-            
-            if (!document.documentElement.hasAttribute('data-theme')) {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                theme = 'dark';
-            } else {
-                document.documentElement.removeAttribute('data-theme');
-            }
-            
-            localStorage.setItem('theme', theme);
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
