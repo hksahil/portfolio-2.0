@@ -34,3 +34,11 @@ themeToggle.addEventListener('click', () => {
                 icons.style.display = 'none';
             }
         });
+        //The date logic goes here
+        var date=new Date(2020,6,1)
+        var today=new Date()
+        var difference=(today-date)/(1000*60*60*24*365) // 1000 is ms
+        var experience=difference.toFixed(1)
+        console.log(experience)
+        var newkey=`${experience}+ years of experience`
+        document.getElementById('date').innerHTML=newkey
