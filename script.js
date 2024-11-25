@@ -25,15 +25,16 @@ themeToggle.addEventListener('click', () => {
     localStorage.setItem('theme', theme);
 }); 
 
-        document.getElementById('get-in-touch').addEventListener('click', function(event) {
-            event.preventDefault();
-            const icons = document.getElementById('icons');
-            if (icons.style.display === 'none' || icons.style.display === '') {
-                icons.style.display = 'flex';
-            } else {
-                icons.style.display = 'none';
-            }
-        });
+document.getElementById('get-in-touch').addEventListener('click', function(event) {
+    event.preventDefault();
+    const icons = document.getElementById('icons');
+    if (icons.style.display === 'none' || icons.style.display === '') {
+        icons.style.display = 'flex';
+    } else {
+        icons.style.display = 'none';
+    }
+});
+
         //The date logic goes here
         var date=new Date(2020,6,1)
         var today=new Date()

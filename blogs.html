@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogs Page</title>
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <style>
+        :root {
+            --background-color: #ffffff;
+            --text-color: #000000;
+            --grey-color: #737373;
+            --hover-color: #f0f0f0;
+            --circle-bg: #f5f5f5;
+            --icon-filter: invert(0%);
+        }
+
+        [data-theme="dark"] {
+            --background-color: #1a1a1a;
+            --text-color: #ffffff;
+            --grey-color: #a3a3a3;
+            --hover-color: #2d2d2d;
+            --circle-bg: #2d2d2d;
+            --icon-filter: invert(100%);
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            text-align: left;
+            padding: 0 15px;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            font-size: 24px;
+            z-index: 1000;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: normal;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 img {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            filter: var(--icon-filter);
+            transition: filter 0.3s ease;
+        }
+
+        p {
+            margin-bottom: 2rem;
+            color: var(--grey-color);
+        }
+
+        .work-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .work-item:hover {
+            background-color: var(--hover-color);
+        }
+
+        .work-item-circle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            margin-right: 1rem;
+            background-color: var(--circle-bg);
+            border-radius: 50%;
+            font-weight: bold;
+            color: var(--grey-color);
+            font-size: 1.2rem;
+        }
+
+        .work-item-details {
+            flex: 1;
+        }
+
+        .work-item-title {
+            font-weight: normal;
+            font-size: 1rem;
+            margin: 0;
+            color: var(--text-color);
+        }
+
+        .work-item-description {
+            margin: 0;
+            color: var(--grey-color);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()">🌓</button>
+    <div class="container">
+        <h1>
+            blogs*
+            <img src="https://cdn-icons-png.flaticon.com/512/545/545680.png" alt="Back Icon" onclick="window.history.back();">
+        </h1>
+        <p>A curated list of recent and not so recent projects.</p>
+
+        <div id="blog-list"></div> <!-- Container for dynamically generated blog items -->
+    </div>
+    <script src="script.js"></script>
+    <script>
+        // Blog data from comments
+        const blogs = [
+            { title: "Evolving landscape of Data Storage", url: "https://media.licdn.com/dms/document/media/v2/D4D2DAQG6nKmaY2tcbA/profile-treasury-document-pdf-analyzed/profile-treasury-document-pdf-analyzed/0/1700559888502?e=1733356800&v=beta&t=tl2eHmhbHLKNQhvHl_aVHR7XHiv9zUXoLEnKPxOz8tQ", description: "An overview of modern data storage solutions." },
+            { title: "How Power BI works under the hood", url: "https://www.sigmoid.com/ebooks-whitepapers/power-bi-hacks/", description: "Tips and tricks to enhance your Power BI experience." },
+            { title: "Quick No-BS Guide to Microsofts Power BI", url: "https://www.linkedin.com/posts/offiicialhksahil_heres-a-quick-no-bs-guide-to-microsofts-activity-7263125884021190656-MQPY?utm_source=share&utm_medium=member_desktop", description: "A straightforward guide to using Power BI effectively." },
+            { title: "Dashboard Rationalisation Process", url: "https://www.linkedin.com/posts/offiicialhksahil_tableau-powerbi-cognos-activity-7238083063140732928-R1jg?utm_source=share&utm_medium=member_desktop", description: "Bring down the number of dashboards your company is using." },
+            { title: "PowerBI Licensing Explained", url: "https://www.linkedin.com/posts/offiicialhksahil_powerbi-fabric-activity-7196391491651407872-N0df?utm_source=share&utm_medium=member_desktop", description: "Understanding Power BI licensing and its capabilities." },
+            { title: "Microsoft Licensing Explained", url: "https://www.linkedin.com/posts/offiicialhksahil_microsoft-has-done-such-a-bad-job-in-explaining-activity-7195693041288962049-HWpH?utm_source=share&utm_medium=member_desktop", description: "Want to purchase licenses for your organization? Read this first!" },
+            { title: "MySQL vs PostgresSQL", url: "https://www.linkedin.com/posts/offiicialhksahil_databases-analytics-postgresql-activity-7222843186463883264-_TiX?utm_source=share&utm_medium=member_desktop", description: "Exploring the two most popular relational databases" },
+            { title: "Becoming a Data Analyst, hard way", url: "https://www.linkedin.com/posts/offiicialhksahil_becoming-a-data-analyst-is-easy-internet-activity-7220655286687031296-aMw6?utm_source=share&utm_medium=member_desktop", description: "A guide to advancing your career as a data analyst." },
+            { title: "Increasing User Adoption", url: "https://www.linkedin.com/posts/offiicialhksahil_bi-analytics-useradoption-activity-7212311282702589952-v4xK?utm_source=share&utm_medium=member_desktop", description: "How to convince users to use your analytics products." },
+            { title: "Selfserve: A boon or a pane?", url: "https://www.linkedin.com/posts/offiicialhksahil_analytics-selfserve-activity-7211936538153164800-q9wS?utm_source=share&utm_medium=member_desktop", description: "Does self-serve really empowers users?" },
+            { title: "Snowflake vs Databricks", url: "https://www.linkedin.com/posts/offiicialhksahil_snowflake-vs-databricks-is-the-new-pepsi-activity-7210921499505885184-1Q79?utm_source=share&utm_medium=member_desktop", description: "A comparison of two cloud data platforms." },
+            { title: "SSMS is still relevant", url: "https://www.linkedin.com/posts/offiicialhksahil_microsoft-analytics-ssms-activity-7209860806899896320-QYld?utm_source=share&utm_medium=member_desktop", description: "Insights into Microsoft’s analytics tools." },
+            { title: "SSAS isn't dead", url: "https://www.linkedin.com/posts/offiicialhksahil_powerbi-analytics-bi-activity-7207615325276688384-gJhf?utm_source=share&utm_medium=member_desktop", description: "Exploring the rebranding strategy of Microsoft" },
+            { title: "OLAP Cubes 101", url: "https://www.linkedin.com/posts/offiicialhksahil_olap-cubes-101-data-cubes-are-an-intimidating-activity-7207245372421734400-OrOP?utm_source=share&utm_medium=member_desktop", description: "An introduction to OLAP cubes and their uses." },
+            { title: "Vendor Lock in: The grey area of Cloud Platforms", url: "https://www.linkedin.com/posts/offiicialhksahil_cloud-aws-azure-activity-7174330979296186368-tTte?utm_source=share&utm_medium=member_desktop", description: "A look at cloud provider's lock in periods and its disadvantages." },
+            { title: "Relational Databases: The fight between Speed and Accuracy", url: "https://www.linkedin.com/posts/offiicialhksahil_databases-mysql-postgresql-activity-7173913261938032640-ZnDY?utm_source=share&utm_medium=member_desktop", description: "Understand why relational databases prioritize the correctness of the data over speed" },
+            { title: "History of data storage solutions", url: "https://www.linkedin.com/posts/offiicialhksahil_analytics-sql-activity-7150735517171470336-Dv7R?utm_source=share&utm_medium=member_desktop", description: "Understanding how data storages evolved from 1970 till today" },
+            { title: "Why do companies make their products open-source?", url: "https://www.linkedin.com/posts/offiicialhksahil_opensource-sql-mysql-activity-7149995646006009856-l0EW?utm_source=share&utm_medium=member_desktop", description: "Exploring open-source products" },
+            { title: "INT(10) is a lie", url: "https://www.linkedin.com/posts/offiicialhksahil_analytics-databases-sql-activity-7130573915180924928-YvDl?utm_source=share&utm_medium=member_desktop", description: "Advanced SQL concepts" }
+        ];
+
+        const blogList = document.getElementById('blog-list');
+
+        blogs.forEach((blog, index) => {
+            const workItem = document.createElement('a');
+            workItem.className = 'work-item';
+            workItem.href = blog.url;
+            workItem.target = '_blank'; // Open in a new tab
+
+            const circle = document.createElement('div');
+            circle.className = 'work-item-circle';
+            circle.textContent = index + 1; // Display index as a number
+
+            const details = document.createElement('div');
+            details.className = 'work-item-details';
+
+            const title = document.createElement('p');
+            title.className = 'work-item-title';
+            title.innerHTML = blog.title; // Set the title
+
+            const description = document.createElement('p');
+            description.className = 'work-item-description';
+            description.textContent = blog.description ? blog.description : "No description available."; // Set the description
+
+            details.appendChild(title);
+            details.appendChild(description);
+            workItem.appendChild(circle);
+            workItem.appendChild(details);
+            blogList.appendChild(workItem);
+        });
+    </script>
+</body>
+</html>
