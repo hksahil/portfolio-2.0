@@ -158,6 +158,8 @@
         </h1>
         <p>A curated list of recent and not so recent blogs</p>
 
+        <input type="text" id="searchBar" onkeyup="searchBlogs()" placeholder="Search..." style="color: #a3a3a3; background-color: transparent; border: none; border-bottom: 1px solid #a3a3a3; width: 100%; outline: none; font-size: 16px;" autofocus>
+
         <div id="blog-list"></div> <!-- Container for dynamically generated blog items -->
     </div>
     <script src="script.js"></script>
@@ -166,7 +168,7 @@
         const blogs = [
             { title: "Evolving landscape of Data storage solutions", url: "https://media.licdn.com/dms/document/media/v2/D4D2DAQG6nKmaY2tcbA/profile-treasury-document-pdf-analyzed/profile-treasury-document-pdf-analyzed/0/1700559888502?e=1733356800&v=beta&t=tl2eHmhbHLKNQhvHl_aVHR7XHiv9zUXoLEnKPxOz8tQ", description: "An overview of modern data storage solutions." },
             { title: "How Power BI works under the hood", url: "https://www.sigmoid.com/ebooks-whitepapers/power-bi-hacks/", description: "Understand the architecture of Microsoft PowerBI to build cool applications on top of it" },
-            { title: "Quick No-BS Guide to Microsoft Fabric", url: "https://www.linkedin.com/posts/offiicialhksahil_heres-a-quick-no-bs-guide-to-microsofts-activity-7263125884021190656-MQPY?utm_source=share&utm_medium=member_desktop", description: "A straightforward guide to using Power BI effectively." },
+            { title: "Quick No-BS Guide to Microsoft Fabric", url: "https://www.linkedin.com/posts/offiicialhksahil_heres-a-quick-no-BS-guide-to-microsofts-activity-7263125884021190656-MQPY?utm_source=share&utm_medium=member_desktop", description: "A straightforward guide to using Power BI effectively." },
             { title: "Vendor Lock in: The grey area of Cloud Platforms", url: "https://www.linkedin.com/posts/offiicialhksahil_cloud-aws-azure-activity-7174330979296186368-tTte?utm_source=share&utm_medium=member_desktop", description: "A look at cloud provider's lock in periods and its disadvantages." },
             { title: "Relational Databases: The fight between Speed and Accuracy", url: "https://www.linkedin.com/posts/offiicialhksahil_databases-mysql-postgresql-activity-7173913261938032640-ZnDY?utm_source=share&utm_medium=member_desktop", description: "Understand why relational databases prioritize the correctness of the data over speed" },
             { title: "What exactly is Onelake?", url: "https://www.linkedin.com/posts/offiicialhksahil_microsoft-fabrics-entire-ideology-of-centralized-activity-7267039372414214144-yh4e?utm_source=share&utm_medium=member_desktop", description: "Exploring the world of data lakes" },
@@ -215,6 +217,21 @@
             workItem.appendChild(details);
             blogList.appendChild(workItem);
         });
+
+        function searchBlogs() {
+            let input = document.getElementById('searchBar').value;
+            let filter = input.toUpperCase();
+            let blogItems = blogList.getElementsByClassName('work-item');
+
+            for (let i = 0; i < blogItems.length; i++) {
+                let title = blogItems[i].getElementsByClassName('work-item-title')[0];
+                if (title.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    blogItems[i].style.display = "";
+                } else {
+                    blogItems[i].style.display = "none";
+                }
+            }
+        }
     </script>
 </body>
 </html>
