@@ -147,6 +147,31 @@
             color: var(--grey-color);
             font-size: 0.9rem;
         }
+
+        .pagination {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .pagination button {
+            margin: 0 0.5rem;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .pagination button:hover {
+            background-color: var(--hover-color);
+        }
+
+        .pagination button.active {
+            font-weight: bold; /* Make active button text bold */
+        }
     </style>
 </head>
 <body>
@@ -161,6 +186,8 @@
         <input type="text" id="searchBar" onkeyup="searchBlogs()" placeholder="Search..." style="color: #a3a3a3; background-color: transparent; border: none; border-bottom: 1px solid #a3a3a3; width: 100%; outline: none; font-size: 16px;" autofocus>
 
         <div id="blog-list"></div> <!-- Container for dynamically generated blog items -->
+
+        <div class="pagination" id="pagination"></div> <!-- Container for pagination -->
     </div>
     <script src="script.js"></script>
     <script>
@@ -189,34 +216,62 @@
         ];
 
         const blogList = document.getElementById('blog-list');
+        const pagination = document.getElementById('pagination');
+        const itemsPerPage = 10;
+        let currentPage = 1;
 
-        blogs.forEach((blog, index) => {
-            const workItem = document.createElement('a');
-            workItem.className = 'work-item';
-            workItem.href = blog.url;
-            workItem.target = '_blank'; // Open in a new tab
+        function displayBlogs() {
+            blogList.innerHTML = '';
+            const start = (currentPage - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const paginatedBlogs = blogs.slice(start, end);
 
-            const circle = document.createElement('div');
-            circle.className = 'work-item-circle';
-            circle.textContent = index + 1; // Display index as a number
+            paginatedBlogs.forEach((blog, index) => {
+                const workItem = document.createElement('a');
+                workItem.className = 'work-item';
+                workItem.href = blog.url;
+                workItem.target = '_blank'; // Open in a new tab
 
-            const details = document.createElement('div');
-            details.className = 'work-item-details';
+                const circle = document.createElement('div');
+                circle.className = 'work-item-circle';
+                circle.textContent = start + index + 1; // Update index calculation
 
-            const title = document.createElement('p');
-            title.className = 'work-item-title';
-            title.innerHTML = blog.title; // Set the title
+                const details = document.createElement('div');
+                details.className = 'work-item-details';
 
-            const description = document.createElement('p');
-            description.className = 'work-item-description';
-            description.textContent = blog.description ? blog.description : "No description available."; // Set the description
+                const title = document.createElement('p');
+                title.className = 'work-item-title';
+                title.innerHTML = blog.title; // Set the title
 
-            details.appendChild(title);
-            details.appendChild(description);
-            workItem.appendChild(circle);
-            workItem.appendChild(details);
-            blogList.appendChild(workItem);
-        });
+                const description = document.createElement('p');
+                description.className = 'work-item-description';
+                description.textContent = blog.description ? blog.description : "No description available."; // Set the description
+
+                details.appendChild(title);
+                details.appendChild(description);
+                workItem.appendChild(circle);
+                workItem.appendChild(details);
+                blogList.appendChild(workItem);
+            });
+
+            displayPagination();
+        }
+
+        function displayPagination() {
+            pagination.innerHTML = '';
+            const pages = Math.ceil(blogs.length / itemsPerPage);
+
+            for (let i = 1; i <= pages; i++) {
+                const button = document.createElement('button');
+                button.textContent = i;
+                button.className = currentPage === i ? 'active' : ''; // Add active class if it's the current page
+                button.onclick = () => {
+                    currentPage = i;
+                    displayBlogs();
+                };
+                pagination.appendChild(button);
+            }
+        }
 
         function searchBlogs() {
             let input = document.getElementById('searchBar').value;
@@ -232,6 +287,8 @@
                 }
             }
         }
+
+        displayBlogs();
     </script>
 </body>
 </html>
