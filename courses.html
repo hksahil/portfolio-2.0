@@ -145,46 +145,32 @@
         </h1>
         <p>A curated list of all the courses I've made.</p>
 
-        <a href="https://www.growdataskills.com/course-tableau" class="work-item">
-            <div class="work-item-circle">TA</div>
-            <div class="work-item-details">
-                <p class="work-item-title">Tableau Course</p>
-                <p class="work-item-description">Learn Tableau in 30+ hours</p>
-            </div>
-        </a>
+        <div id="courses-list"></div>
 
-        <a href="https://www.growdataskills.com/tableau-project" class="work-item">
-            <div class="work-item-circle">DA</div>
-            <div class="work-item-details">
-                <p class="work-item-title">Analytics Projects Course</p>
-                <p class="work-item-description">Data Analysis projects in 30+ hours</p>
-            </div>
-        </a>
-
-        <a href="https://www.growdataskills.com/course-etl" class="work-item">
-            <div class="work-item-circle">EP</div>
-            <div class="work-item-details">
-                <p class="work-item-title">ETL Course</p>
-                <p class="work-item-description">Build Scalable ETL Pipelines in 30+ hours</p>
-            </div>
-        </a>
-
-        <a href="https://www.growdataskills.com/course-dbt" class="work-item">
-            <div class="work-item-circle">DT</div>
-            <div class="work-item-details">
-                <p class="work-item-title">dbt Course</p>
-                <p class="work-item-description">Data Transformations with dbt in 30+ hours</p>
-            </div>
-        </a>
-
-        <a href="https://www.growdataskills.com/devops-bigdata" class="work-item">
-            <div class="work-item-circle">OP</div>
-            <div class="work-item-details">
-                <p class="work-item-title">DataOps Course</p>
-                <p class="work-item-description">Learn Dev/DataOps in 14+ hours</p>
-            </div>
-        </a>
     </div>
+    <script>
+        const courses = [
+            { circle: 'TA', title: 'Tableau Course', description: 'Learn Tableau in 30+ hours', href: 'https://www.growdataskills.com/course-tableau' },
+            { circle: 'DA', title: 'Analytics Projects Course', description: 'Data Analysis projects in 30+ hours', href: 'https://www.growdataskills.com/tableau-project' },
+            { circle: 'EP', title: 'ETL Course', description: 'Build Scalable ETL Pipelines in 30+ hours', href: 'https://www.growdataskills.com/course-etl' },
+            { circle: 'DT', title: 'dbt Course', description: 'Data Transformations with dbt in 30+ hours', href: 'https://www.growdataskills.com/course-dbt' },
+            { circle: 'OP', title: 'DataOps Course', description: 'Learn Dev/DataOps in 14+ hours', href: 'https://www.growdataskills.com/devops-bigdata' }
+        ];
+
+        const coursesList = document.getElementById('courses-list');
+        courses.forEach(course => {
+            const courseItem = `
+                <a href="${course.href}" class="work-item">
+                    <div class="work-item-circle">${course.circle}</div>
+                    <div class="work-item-details">
+                        <p class="work-item-title">${course.title}</p>
+                        <p class="work-item-description">${course.description}</p>
+                    </div>
+                </a>
+            `;
+            coursesList.innerHTML += courseItem;
+        });
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
