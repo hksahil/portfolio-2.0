@@ -135,109 +135,51 @@
 </head>
 <body>
     <button class="theme-toggle" id="theme-toggle">🌓</button>
-    <div class="container">
+    <div class="container" id="work-items-container">
         <h1>
             projects*
-            <img src="https://cdn-icons-png.flaticon.com/512/545/545680.png" alt="Back Icon" onclick="window.history.back();">
+            <img src="https://cdn-icons-png.flaticon.com/512/545/545680.png" alt="Home Icon" onclick="window.location.href='home.html';">
         </h1>
         <p>A curated list of recent and not so recent projects.</p>
 
-        <a href="#" class="work-item">
-            <div class="work-item-circle">AI</div>
-            <div class="work-item-details">
-                <p class="work-item-title">AI Analysis</p>
-                <p class="work-item-description">A ChatGPT-powered website for analysts. Learned: ChatGPT, AI, Tableau</p>
-            </div>
-        </a>
-
-        <a href="#" class="work-item">
-            <div class="work-item-circle">SC</div>
-            <div class="work-item-details">
-                <p class="work-item-title">Salary Increment Calculator</p>
-                <p class="work-item-description">A tool for salary negotiations. Learned: Streamlit</p>
-            </div>
-        </a>
-
-        <a href="#" class="work-item">
-            <div class="work-item-circle">TD</div>
-            <div class="work-item-details">
-                <p class="work-item-title">Tableau Documentor</p>
-                <p class="work-item-description">Auto-generates documentation for Tableau workbooks. Learned: TWBx, TWB, XML</p>
-            </div>
-        </a>
-
-        <a href="#" class="work-item">
-            <div class="work-item-circle">PY</div>
-            <div class="work-item-details">
-                <p class="work-item-title">Python 101 - Digital ebook</p>
-                <p class="work-item-description">Tech knowledge condensed into an ebook. Learned: Data Analytics, Python, Tableau</p>
-            </div>
-        </a>
-
-        <a href="#" class="work-item">
-            <div class="work-item-circle">TL</div>
-            <div class="work-item-details">
-                <p class="work-item-title">TLDR of the Internet</p>
-                <p class="work-item-description">Daily internet content summarizer. Learned: Cron Jobs, Server architectures, Analytics</p>
-            </div>
-        </a>
-
-        <a href="#" class="work-item">
-            <div class="work-item-circle">EM</div>
-            <div class="work-item-details">
-                <p class="work-item-title">Expense Manager</p>
-                <p class="work-item-description">A webapp to track monthly expenses and spending patterns</p>
-            </div>
-        </a>
-
-        <a href="#" class="work-item">
-            <div class="work-item-circle">RA</div>
-            <div class="work-item-details">
-                <p class="work-item-title">Ramayan API</p>
-                <p class="work-item-description">Open-source API for generating Ramayana quotes randomly or by character</p>
-            </div>
-        </a>
-
-        <a href="#" class="work-item">
-            <div class="work-item-circle">FL</div>
-            <div class="work-item-details">
-                <p class="work-item-title">My frontend list</p>
-                <p class="work-item-description">Curated collection of frontend development tools and resources</p>
-            </div>
-        </a>
-
-        <a href="#" class="work-item">
-            <div class="work-item-circle">QM</div>
-            <div class="work-item-details">
-                <p class="work-item-title">QuizMore</p>
-                <p class="work-item-description">Sports quiz platform integrated with Khelomore</p>
-            </div>
-        </a>
-
-        <a href="#" class="work-item">
-            <div class="work-item-circle">CV</div>
-            <div class="work-item-details">
-                <p class="work-item-title">Corona Virus Tracker</p>
-                <p class="work-item-description">Real-time COVID-19 statistics using disease.sh API</p>
-            </div>
-        </a>
-
-        <a href="#" class="work-item">
-            <div class="work-item-circle">DF</div>
-            <div class="work-item-details">
-                <p class="work-item-title">Dhaga Foundation</p>
-                <p class="work-item-description">Website for an NGO providing education in Dhule, Maharashtra</p>
-            </div>
-        </a>
-
-        <a href="#" class="work-item">
-            <div class="work-item-circle">KH</div>
-            <div class="work-item-details">
-                <p class="work-item-title">Khelomore @ Home</p>
-                <p class="work-item-description">Platform for booking doorstep sports training sessions</p>
-            </div>
-        </a>
+        <div id="work-items-list"></div>
     </div>
+
+    <script>
+        const workItems = [
+            { circle: '01', title: 'Tableau to Power BI Accelerator', description: 'Accelerator to migrate Tableau dashboards to Power BI', href: 'https://tableau-to-pbi.streamlit.app/' },
+            { circle: '02', title: 'Tableau Dependency Mapper', description: 'Tableau field dependency mapper', href: 'https://github.com/hksahil/AI-Analysis/blob/main/pages/4_%F0%9F%93%8A_Tableau%20Dependency%20Mapper.py' },
+            { circle: '03', title: 'PowerBI Standardisation Automator', description: 'Automated the standardisation of PowerBI Reports', href: 'https://github.com/hksahil/Sigmoid-pbi-automations' },
+            { circle: '04', title: 'Dashboard Image extractor', description: 'Extract the logos/images/icons from tableau or powerbi dashboards automatically', href: 'https://dashboard-image-extractor.streamlit.app/' },
+            { circle: '05', title: 'Cognos Metadata Extractor', description: 'Auto-generates documentation for Cognos Reports', href: 'https://github.com/hksahil/Cognos-to-PBI-Accelerators' },
+            { circle: '06', title: 'Python 101 - Digital ebook', description: 'Tech knowledge condensed into an ebook. Learned: Data Analytics, Python, Tableau', href: 'https://python-with-sahil.netlify.app/intro.html' },
+            { circle: '07', title: 'TLDR of the Internet', description: 'Daily internet content summarizer. Learned: Cron Jobs, Server architectures, Analytics', href: 'https://github.com/hksahil/TLDR-for-the-Internet' },
+            { circle: '08', title: 'Expense Manager', description: 'A webapp to track monthly expenses and spending patterns', href: 'https://expense-managr.netlify.app/' },
+            { circle: '09', title: 'Ramayan API', description: 'Open-source API for generating Ramayana quotes randomly or by character', href: 'https://github.com/hksahil/ramayan-api' },
+            { circle: '10', title: 'My frontend list', description: 'Curated collection of frontend development tools and resources', href: 'https://myfrontendlist.web.app/' },
+            { circle: '11', title: 'QuizMore', description: 'Sports quiz platform integrated with Khelomore', href: 'https://pages.khelomore.com/quizmore/quizmore.html' },
+            { circle: '12', title: 'Corona Virus Tracker', description: 'Real-time COVID-19 statistics using disease.sh API', href: 'https://covid-19-tracker-72007.web.app/' },
+            //{ circle: '11', title: 'Dhaga Foundation', description: 'Website for an NGO providing education in Dhule, Maharashtra', href: 'dhaga-foundation.html' },
+        ];
+
+        const workItemsContainer = document.getElementById('work-items-list');
+
+        workItems.forEach(item => {
+            const workItem = document.createElement('a');
+            workItem.className = 'work-item';
+            workItem.href = item.href;
+
+            workItem.innerHTML = `
+                <div class="work-item-circle">${item.circle}</div>
+                <div class="work-item-details">
+                    <p class="work-item-title">${item.title}</p>
+                    <p class="work-item-description">${item.description}</p>
+                </div>
+            `;
+
+            workItemsContainer.appendChild(workItem);
+        });
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
